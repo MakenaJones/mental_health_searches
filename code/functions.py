@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 
 
 
-def forecast_state_search(state, period, steps, search, regressor, lags):
+def forecast_state_search(state, period, steps, search, regressor, lags, plot = True):
     '''
     Read the data and forecast for chosen search term with chosen regressor
     Input:
@@ -79,19 +79,21 @@ def forecast_state_search(state, period, steps, search, regressor, lags):
     if error_mse < 100:
         print(f"Test error (mse): {error_mse} \n")
         
-        # Plot predictions vs actual
-        fig, ax=plt.subplots(figsize=(9, 4))
-        data_train[search].plot(ax=ax, label='train')
-        data_test[search].plot(ax=ax, label='test')
-        predictions.plot(ax=ax, label='predictions')
-        ax.legend()
-        ax.set_title(f'Forecast for {state} and {search}', size = 20)
-        ax.set_ylabel(f'{search}', size = 20)
-        ax.set_xlabel('Week', size = 20);
-        plt.plot()
         
         print('Feature Importances')
         print(forecaster.get_feature_importance())
+        
+        if plot == True:
+            # Plot predictions vs actual
+            fig, ax=plt.subplots(figsize=(9, 4))
+            data_train[search].plot(ax=ax, label='train')
+            data_test[search].plot(ax=ax, label='test')
+            predictions.plot(ax=ax, label='predictions')
+            ax.legend()
+            ax.set_title(f'Forecast for {state} and {search}', size = 20)
+            ax.set_ylabel(f'{search}', size = 20)
+            ax.set_xlabel('Week', size = 20);
+            plt.plot()
         
         return forecaster
     else:
