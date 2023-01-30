@@ -196,7 +196,7 @@ def forecast_file_search_without_exogin(file, period, steps, search, regressor, 
         
         
         
-def plot_resiriction_importances(data, search, ylim):
+def plot_resiriction_importances(data, search, ylim, time):
     '''
     Plot side by side plots of Restriction importsnces for forecasting for Most and Least restricted states
     Input:
@@ -239,4 +239,4 @@ def plot_resiriction_importances(data, search, ylim):
 
     # Save for the presentation 
     plt.tight_layout()
-    plt.savefig(f'../images/{search_str} COVID-19 Restrictions importances.jpeg');
+    plt.savefig(f'../images/{search_str} COVID-19 Restrictions importances {time}.jpeg');
