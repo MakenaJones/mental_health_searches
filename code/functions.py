@@ -212,19 +212,24 @@ def plot_resiriction_importances(data, search, ylim):
     if search == 'mental_health':
         search_str = 'Mental Health'
     
+    #use orange for bar with max value and grey for all other bars
+    cols_most = ['firebrick' if (x > 0) else 'steelblue' for x in data[f'{search}_most']]
+    
     fig, ax = plt.subplots(1,2, figsize=(20,7))
 
     fig.suptitle(f'{search_str} COVID-19 Restrictions importances for forecasting \n', fontsize=20)
     
-    sns.boxplot(data = data, x = 'feature', y = f'{search}_most', ax=ax[0])
+    sns.barplot(data = data, x = 'feature', y = f'{search}_most', ax=ax[0], palette=cols_most)
     ax[0].set_title('Most restricted states', fontsize=16)
     ax[0].set_xlabel('COVID-19 Restriction', fontsize=15)
     ax[0].xaxis.set_tick_params(labelsize=15, rotation =15)
     ax[0].set_ylabel('Restrictions importances', fontsize=15)
     ax[0].yaxis.set_tick_params(labelsize=15)
     ax[0].set_ylim(ylim)
+    
 
-    sns.boxplot(data = data, x = 'feature', y = f'{search}_least', ax=ax[1])
+    cols_least = ['firebrick' if (x > 0) else 'steelblue' for x in data[f'{search}_most']]
+    sns.barplot(data = data, x = 'feature', y = f'{search}_least', ax=ax[1], palette=cols_least)
     ax[1].set_title('Least restricted states', fontsize=16)
     ax[1].set_xlabel('COVID-19 Restriction', fontsize=15)
     ax[1].xaxis.set_tick_params(labelsize=15, rotation =15)
