@@ -1,6 +1,7 @@
 import pandas as pd
 import warnings
 import matplotlib.pyplot as plt
+import seaborn as sns
 from skforecast.ForecasterAutoreg import ForecasterAutoreg
 
 from sklearn.linear_model import Ridge, Lasso
@@ -190,3 +191,47 @@ def forecast_file_search_without_exogin(file, period, steps, search, regressor, 
         return forecaster
     else:
         print(f"Test error (mse): {error_mse} \n")
+        
+        
+        
+        
+        
+def plot_resiriction_importances(data, search, ylim):
+    '''
+    Plot side by side plots of Restriction importsnces for forecasting for Most and Least restricted states
+    Input:
+    data - dattaframe of all COVID 19 restrictions feature importances
+    search - str, search term lowercase
+    ylim - list, limits for y-axis 
+    
+    Outputs:
+    Side by side plot of restriction importances for forecasting
+    Saves figure to jpeg file
+    '''
+    search_str = search.title()
+    if search == 'mental_health':
+        search_str = 'Mental Health'
+    
+    fig, ax = plt.subplots(1,2, figsize=(20,7))
+
+    fig.suptitle(f'{search_str} COVID-19 Restrictions importances for forecasting \n', fontsize=20)
+    
+    sns.boxplot(data = data, x = 'feature', y = f'{search}_most', ax=ax[0])
+    ax[0].set_title('Most restricted states', fontsize=16)
+    ax[0].set_xlabel('COVID-19 Restriction', fontsize=15)
+    ax[0].xaxis.set_tick_params(labelsize=15, rotation =15)
+    ax[0].set_ylabel('Restrictions importances', fontsize=15)
+    ax[0].yaxis.set_tick_params(labelsize=15)
+    ax[0].set_ylim(ylim)
+
+    sns.boxplot(data = data, x = 'feature', y = f'{search}_least', ax=ax[1])
+    ax[1].set_title('Least restricted states', fontsize=16)
+    ax[1].set_xlabel('COVID-19 Restriction', fontsize=15)
+    ax[1].xaxis.set_tick_params(labelsize=15, rotation =15)
+    ax[1].set_ylabel('Restrictions importances', fontsize=15)
+    ax[1].yaxis.set_tick_params(labelsize=15)
+    ax[1].set_ylim(ylim)
+
+    # Save for the presentation 
+    plt.tight_layout()
+    plt.savefig(f'../images/{search_str} COVID-19 Restrictions importances.jpeg');
