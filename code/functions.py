@@ -203,6 +203,7 @@ def plot_resiriction_importances(data, search, ylim, time):
     data - dattaframe of all COVID 19 restrictions feature importances
     search - str, search term lowercase
     ylim - list, limits for y-axis 
+    time - string, for the file name of the saved graphs
     
     Outputs:
     Side by side plot of restriction importances for forecasting
