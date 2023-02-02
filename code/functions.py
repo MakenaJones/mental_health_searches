@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from skforecast.ForecasterAutoreg import ForecasterAutoreg
 
-from sklearn.linear_model import Ridge, Lasso
+from sklearn.linear_model import Lasso
 
-from sklearn.ensemble import GradientBoostingRegressor
+
 from sklearn.metrics import mean_squared_error
 
-
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 
 def forecast_file_search(file, period, steps, search, regressor, lags, plot = True):
@@ -21,24 +21,23 @@ def forecast_file_search(file, period, steps, search, regressor, lags, plot = Tr
     file - lowercase name of the file 
     period - last date for the data, string, format Y-m-d, maxinmum 2023-01-01
     steps - int, test split (number of weeks for test data and predicting)
+    search - string, search term
     regressor - name of regressor for forecasting model 
     lags - int, on what time perion to forecast
+    plot - boolean, do we want a plot
     
     Output:
     State and Search term
-    Forecaster output
-    First 3 predictions
-    Predictions vs actual plot
     MSE 
-    Feature importances
-    
+    Predictions vs actual plot
+        
     Return:
     Forecaster
     '''
     # Print state and search
     print(f'\n Forecast for {file} and {search} untill {period} \n' )
     
-    # Read the data for the state
+    # Read the data
     df = pd.read_csv(f'../data/{file}.csv')
     df['week'] = pd.to_datetime(df['week'], format = '%Y-%m-%d')
     df = df[df['week'] < period]
@@ -199,22 +198,22 @@ def plot_resiriction_importances(data, search, ylim, time):
     fig.suptitle(f'{search_str} COVID-19 Restrictions importances for forecasting \n', fontsize=20)
     
     sns.barplot(data = data, x = 'feature', y = f'{search}_most', ax=ax[0], palette=cols_most)
-    ax[0].set_title('Most restricted states', fontsize=16)
+    ax[0].set_title('Most restricted states', fontsize=20)
     ax[0].set_xlabel('COVID-19 Restriction', fontsize=15)
-    ax[0].xaxis.set_tick_params(labelsize=15, rotation =15)
-    ax[0].set_xticks(np.arange(6), ['Depression', 'Anxiety', 'Addiction', 'Counselling', 'Mental Health'])
-    ax[0].set_ylabel('Restrictions importances', fontsize=15)
+    ax[0].xaxis.set_tick_params(labelsize=15, rotation=15)
+    ax[0].set_xticks(np.arange(5), ['Depression', 'Anxiety', 'Addiction', 'Counselling', 'Mental Health'])
+    ax[0].set_ylabel('Restrictions importances', fontsize=20)
     ax[0].yaxis.set_tick_params(labelsize=15)
     ax[0].set_ylim(ylim)
     
 
     cols_least = ['firebrick' if (x > 0) else 'steelblue' for x in data[f'{search}_most']]
     sns.barplot(data = data, x = 'feature', y = f'{search}_least', ax=ax[1], palette=cols_least)
-    ax[1].set_title('Least restricted states', fontsize=16)
+    ax[1].set_title('Least restricted states', fontsize=20)
     ax[1].set_xlabel('COVID-19 Restriction', fontsize=15)
-    ax[1].set_xticks(np.arange(6), ['Depression', 'Anxiety', 'Addiction', 'Counselling', 'Mental Health'])
-    ax[1].xaxis.set_tick_params(labelsize=15, rotation =15)
-    ax[1].set_ylabel('Restrictions importances', fontsize=15)
+    ax[1].set_xticks(np.arange(5), ['Depression', 'Anxiety', 'Addiction', 'Counselling', 'Mental Health'])
+    ax[1].xaxis.set_tick_params(labelsize=15, rotation=15)
+    ax[1].set_ylabel('Restrictions importances', fontsize=20)
     ax[1].yaxis.set_tick_params(labelsize=15)
     ax[1].set_ylim(ylim)
 
