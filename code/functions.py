@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import warnings
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -90,8 +91,8 @@ def forecast_file_search(file, period, steps, search, regressor, lags, plot = Tr
         ax.legend()
         ax.set_title(f'Forecast for {file} and {search}', size = 20)
         ax.set_ylabel(f'{search}', size = 20)
-        ax.set_xlabel('Week', size = 20);
-        plt.plot()
+        ax.set_xlabel('Week', size = 20)
+        plt.plot();
 
     return forecaster
     
@@ -201,6 +202,7 @@ def plot_resiriction_importances(data, search, ylim, time):
     ax[0].set_title('Most restricted states', fontsize=16)
     ax[0].set_xlabel('COVID-19 Restriction', fontsize=15)
     ax[0].xaxis.set_tick_params(labelsize=15, rotation =15)
+    ax[0].set_xticks(np.arange(6), ['Depression', 'Anxiety', 'Addiction', 'Counselling', 'Mental Health'])
     ax[0].set_ylabel('Restrictions importances', fontsize=15)
     ax[0].yaxis.set_tick_params(labelsize=15)
     ax[0].set_ylim(ylim)
@@ -210,6 +212,7 @@ def plot_resiriction_importances(data, search, ylim, time):
     sns.barplot(data = data, x = 'feature', y = f'{search}_least', ax=ax[1], palette=cols_least)
     ax[1].set_title('Least restricted states', fontsize=16)
     ax[1].set_xlabel('COVID-19 Restriction', fontsize=15)
+    ax[1].set_xticks(np.arange(6), ['Depression', 'Anxiety', 'Addiction', 'Counselling', 'Mental Health'])
     ax[1].xaxis.set_tick_params(labelsize=15, rotation =15)
     ax[1].set_ylabel('Restrictions importances', fontsize=15)
     ax[1].yaxis.set_tick_params(labelsize=15)
