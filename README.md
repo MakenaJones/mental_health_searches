@@ -14,7 +14,9 @@ Can we use time series data with covid restrictions as exogenous features to pre
 ### Data sources
 
 ### Data Dictionary
-
+|Feature|Type|Dataset|Description|
+|---|---|---|---|
+| | | |
 
 ---
 ### Methodology
