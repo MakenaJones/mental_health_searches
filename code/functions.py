@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from skforecast.ForecasterAutoreg import ForecasterAutoreg
 
-from sklearn.linear_model import Ridge, Lasso
+from sklearn.linear_model import Lasso
 
-from sklearn.ensemble import GradientBoostingRegressor
+
 from sklearn.metrics import mean_squared_error
 
-
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 
 def forecast_file_search(file, period, steps, search, regressor, lags, plot = True):
@@ -21,17 +21,16 @@ def forecast_file_search(file, period, steps, search, regressor, lags, plot = Tr
     file - lowercase name of the file 
     period - last date for the data, string, format Y-m-d, maxinmum 2023-01-01
     steps - int, test split (number of weeks for test data and predicting)
+    search - string, search term
     regressor - name of regressor for forecasting model 
     lags - int, on what time perion to forecast
+    plot - boolean, do we want a plot
     
     Output:
     State and Search term
-    Forecaster output
-    First 3 predictions
-    Predictions vs actual plot
     MSE 
-    Feature importances
-    
+    Predictions vs actual plot
+        
     Return:
     Forecaster
     '''
