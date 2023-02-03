@@ -49,7 +49,7 @@ Using google trends , we gathered google search data related to 5 mental health 
 * Sources for timelines of different state-mandated Covid-19 restrictions:
     * [Covid State Restrictions](../sources/covid_restrictions.txt)
 
-* Datasets:
+### Datasets
 |Dataset|Description|
 |---|---|
 |[alaska.csv]('../data/alaska.csv')| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
