@@ -356,7 +356,16 @@ def SARIMAX_model(train, test, order, seasonal_order, search):
 
 def plot_MSE_difference(rmf_mse_dict, sarimax_mse_dict, restrictions, period, ylim):
     '''
-    Plot the diffetences between the models
+    Plot the diffetences between the models MSE with and without exogenous features
+    Input:
+    rmf_mse_dict - dictionary with MSE differences of Recursive multi-step forecasting model with and without exogenous features
+    sarimax_mse_dict - dictionary with MSE differences of SARIMAX model with and without exogenous features
+    restrictions - string, level of restrictions 
+    period - string, the time we looking at for the file name
+    ylim - list, from min to max of y axis
+    
+    Output:
+    Side by side plots with of two models MSE differences
     '''
     
     fig, ax = plt.subplots(1,2, figsize=(14,7))
