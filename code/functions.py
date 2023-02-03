@@ -351,3 +351,36 @@ def SARIMAX_model(train, test, order, seasonal_order, search):
     res=pd.DataFrame({'pred':yhat, search:test[search].values})
 
     return res
+
+
+
+def plot_MSE_difference(rmf_mse_dict, sarimax_mse_dict, restrictions, period, ylim):
+    '''
+    Plot the diffetences between the models
+    '''
+    
+    fig, ax = plt.subplots(1,2, figsize=(14,7))
+    fig.suptitle(f'MSE differences for models with and without exogenous features for {restrictions} restricted states\n', fontsize=20)
+    
+    # Plot Recursive multi-step forecasting
+    cols = ['darkolivegreen' if (x < 0) else 'burlywood' for x in rmf_mse_dict.values()]
+    ax[0].set_title('Recursive multi-step forecasting', fontsize=16)
+    ax[0].bar(range(len(rmf_mse_dict)), list(rmf_mse_dict.values()), tick_label=list(rmf_mse_dict.keys()), color = cols)
+    ax[0].set_ylim(ylim)
+    ax[0].set_ylabel('MSE difference', fontsize=15)
+    ax[0].set_xticklabels(['Depression', 'Anxiety', 'Addiction', 'Counceling', 'Mental Health'] )
+    ax[0].xaxis.set_tick_params(labelsize=15, rotation = 15)
+
+    # Plost SARIMAX
+    cols_1 = ['darkolivegreen' if (x < 0) else 'burlywood' for x in sarimax_mse_dict.values()]
+    ax[1].bar(range(len(sarimax_mse_dict)), list(sarimax_mse_dict.values()), tick_label=list(sarimax_mse_dict.keys()), color = cols_1)
+    ax[1].set_title('SARIMAX', fontsize=16)
+    ax[1].set_ylim(ylim)
+    ax[1].xaxis.set_tick_params(labelsize=15)
+    ax[1].set_xticklabels(['Depression', 'Anxiety', 'Addiction', 'Counceling', 'Mental Health'] )
+    ax[1].xaxis.set_tick_params(labelsize=15, rotation = 15)
+    
+    
+    # Save for the presentation
+    plt.tight_layout()
+    plt.savefig(f'../images/{restrictions}_mse_diff_{period}.jpeg');
