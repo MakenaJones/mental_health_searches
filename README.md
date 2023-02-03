@@ -9,6 +9,7 @@ Can we use time series data with covid restrictions as exogenous features to pre
 ### Table of Contents
 
 1. [Data Preparation](../code/01_Data_preparation.ipynb)
+
 Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
 
 2. [EDA](../code/02_EDA.ipynb)
@@ -20,10 +21,12 @@ Using google trends , we gathered google search data related to 5 mental health 
     * 'Mental health' and 'anxiety' rising sharply. 
     * 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
     * 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
-    * 'Counselling' and 'addiction' both had a dip around the end of 2020. 
-
+    * 'Counselling' and 'addiction' both had a dip around the end of 2020.
+    
+# ![](http://localhost:8888/lab/tree/images/Depression%20Monthly%20seasonality%20by%20year.png)
 
 3. [Autocorrelation Trend Detection]
+
 Used greykite to ... Search trends for the most and least restricted states are similar. Trend changepoints do not appear to be tied to restriction timeframe in a meaningful way.
 
 4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb)
