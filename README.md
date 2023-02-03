@@ -8,25 +8,25 @@ Can we use time series data with covid restrictions as exogenous features to pre
 
 ### Table of Contents
 
-1. ['Data Preparation'](../code/01_Data_preparation.ipynb)
+1. [Data Preparation](../code/01_Data_preparation.ipynb)
 
-2. ['EDA'](../code/02_EDA.ipynb)
+2. [EDA](../code/02_EDA.ipynb)
 
-3. ['Autocorrelation Trend Detection']
+3. [Autocorrelation Trend Detection]
 
-4. ['Models for the Start of the Covid-19 Pandemic'](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb)
+4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb)
 
-5. ['Models for the Middle of the Covid-19 Pandemic'](../code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb)
+5. [Models for the Middle of the Covid-19 Pandemic](../code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb)
 
-6. ['Models for the End of the Covid-19 Pandemic'](../code/06_End_COVID_ForecasterAutoreg_SARIMAX.ipynb)
+6. [Models for the End of the Covid-19 Pandemic](../code/06_End_COVID_ForecasterAutoreg_SARIMAX.ipynb)
 
-7. ['Vector Autoregression'](../code/07_Vector_Autoregression.ipynb)
+7. [Vector Autoregression](../code/07_Vector_Autoregression.ipynb)
 
-8. ['TBATS'](../code/08_TBATS.ipynb)
+8. [TBATS](../code/08_TBATS.ipynb)
 
-9. ['SARIMA'](../code/09_SARIMA.ipynb)
+9. [SARIMA](../code/09_SARIMA.ipynb)
 
-10. ['Greykite'](../code/10_Greykite.ipynb)
+10. [Greykite](../code/10_Greykite.ipynb)
 ---
 ### Data
 
@@ -35,36 +35,36 @@ Can we use time series data with covid restrictions as exogenous features to pre
 Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
 
 * Google trends:
-    * ['Alaska'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-AK&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['Arizona'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-AZ&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['California'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-CA&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['Florida'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-FL&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['Hawaii'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-HI&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['Massachusetts'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-MA&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['New York'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-NY&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['South Dakota'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-SD&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['Texas'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-TX&q=depression,anxiety,addiction,counseling,mental%20health)
-    * ['Washington'](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-WA&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Alaska](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-AK&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Arizona](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-AZ&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [California](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-CA&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Florida](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-FL&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Hawaii](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-HI&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Massachusetts](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-MA&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [New York](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-NY&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [South Dakota](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-SD&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Texas](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-TX&q=depression,anxiety,addiction,counseling,mental%20health)
+    * [Washington](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-WA&q=depression,anxiety,addiction,counseling,mental%20health)
     
 * Sources for timelines of different state-mandated Covid-19 restrictions:
-    * ['Covid State Restrictions'](../sources/covid_restrictions.txt)
+    * [Covid State Restrictions](../sources/covid_restrictions.txt)
 
 * Datasets:
 |Dataset|Description|
 |---|---|
-|['alaska.csv']('../data/alaska.csv')| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
-|['all_states.csv']('../data/alaska.csv')| Concatenated all 10 state datasets.
-|['arizona.csv']('../data/arizona.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
-|['california.csv']('../data/california.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|['florida.csv']('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|['hawaii.csv']('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|['least_restricted.csv']('../data/least_restricted.csv')| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
-|['mass.csv']('../data/mass.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Massachusetts from January 2018 - January 2023.
-|['most_restricted.csv']('../data/most_restricted.csv')| Concatenated datasets for the states with the most Covid-19 restrictions in place during the pandemic: Alaska, California, Hawaii, Massachusetts, New York and Washington.
-|['new_york.csv']('../data/new_york.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of New York from January 2018 - January 2023.
-|['south_dakota.csv']('../data/south_dakota.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of South Dakota from January 2018 - January 2023.
-|['texas.csv']('../data/texas.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Texas from January 2018 - January 2023.
-|['washington.csv']('../data/washington.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Washington state from January 2018 - January 2023.
+|[alaska.csv]('../data/alaska.csv')| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
+|[all_states.csv]('../data/alaska.csv')| Concatenated all 10 state datasets.
+|[arizona.csv]('../data/arizona.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
+|[california.csv]('../data/california.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[florida.csv]('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[hawaii.csv]('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[least_restricted.csv]('../data/least_restricted.csv')| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
+|[mass.csv]('../data/mass.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Massachusetts from January 2018 - January 2023.
+|[most_restricted.csv]('../data/most_restricted.csv')| Concatenated datasets for the states with the most Covid-19 restrictions in place during the pandemic: Alaska, California, Hawaii, Massachusetts, New York and Washington.
+|[new_york.csv]('../data/new_york.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of New York from January 2018 - January 2023.
+|[south_dakota.csv]('../data/south_dakota.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of South Dakota from January 2018 - January 2023.
+|[texas.csv]('../data/texas.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Texas from January 2018 - January 2023.
+|[washington.csv]('../data/washington.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Washington state from January 2018 - January 2023.
 
 ### Data Dictionary
 |Feature|Type|Dataset|Description|
