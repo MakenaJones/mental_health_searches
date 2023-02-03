@@ -2,6 +2,7 @@
 
 ---
 ### Problem Statement
+Our data science group was hired by the [National Institute on Mental Health](https://www.nimh.nih.gov/) to evaluate the effect of 
 Can we use time series data with covid restrictions as exogenous features to predict mental health related google searches?  By modelling on both groups of states with strict restrictions and those with less strict restrictions, will models including the various state restrictions create better forecasts for the various mental health related google search terms?
 
 ---
