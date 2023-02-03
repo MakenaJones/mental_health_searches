@@ -2,8 +2,9 @@
 
 ---
 ### Problem Statement
-Our data science group was hired by the [National Institute on Mental Health](https://www.nimh.nih.gov/) to evaluate the effect of 
-Can we use time series data with covid restrictions as exogenous features to predict mental health related google searches?  By modelling on both groups of states with strict restrictions and those with less strict restrictions, will models including the various state restrictions create better forecasts for the various mental health related google search terms?
+Our data science group was hired by the [National Institute on Mental Health](https://www.nimh.nih.gov/) to evaluate the effect of the Covid-19 pandemic, particularly with regards to the effect of restrictions put in place in response to the pandemic. With the huge range of restrictions across states, we decided to approach this problem by looking at Google Trends data for different mental health related terms in a variety of states with a variety of restrictions in place before, during and after the pandemic.
+
+Can we use time series data with covid restrictions as exogenous features to predict mental health related google searches?  By modelling on both groups of states with strict restrictions and those with less strict restrictions, will models including the various state restrictions create better forecasts for the various mental health related google search terms than models without?
 
 ---
 
@@ -11,41 +12,46 @@ Can we use time series data with covid restrictions as exogenous features to pre
 
 1. [Data Preparation](../code/01_Data_preparation.ipynb)
 
-Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
+
 
 2. [EDA](../code/02_EDA.ipynb)
-* Grouped states into groups: 'most restricted' and 'least restricted' after examining search terms per state and realising there was too much information to make meaningful predictions. 
-* Compared searches of different mental health search for the two groups of states and found, although similar, there was a noticable difference between the two groups during the COVID-19 pandemic, in the middle of 2020, particularly for the search term 'mental health'.
-* Checked that data was stationary for both groups using the augmented Dickey-Fuller Test.
-* Checked seasonality of search datas and found:
-    * 'Depression' searches trend down. 
-    * 'Mental health' and 'anxiety' rising sharply. 
-    * 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
-    * 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
-    * 'Counselling' and 'addiction' both had a dip around the end of 2020.
-    
-# ![](http://localhost:8888/lab/tree/images/Depression%20Monthly%20seasonality%20by%20year.png)
+
 
 3. [Autocorrelation Trend Detection]
 
-Used greykite to ... Search trends for the most and least restricted states are similar. Trend changepoints do not appear to be tied to restriction timeframe in a meaningful way.
+Quick search of different models of ARIMA for different search terms. Looking for changepoints using greykite based on various lockdown periods. Do not appear to be tied to restriction timeframe in a meaningful way.
 
 4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb)
 
+
+
 5. [Models for the Middle of the Covid-19 Pandemic](../code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb)
+
+
 
 6. [Models for the End of the Covid-19 Pandemic](../code/06_End_COVID_ForecasterAutoreg_SARIMAX.ipynb)
 
+
+
 7. [Vector Autoregression](../code/07_Vector_Autoregression.ipynb)
+
+
 
 8. [TBATS](../code/08_TBATS.ipynb)
 
+
+
 9. [SARIMA](../code/09_SARIMA.ipynb)
 
+
+
 10. [Greykite](../code/10_Greykite.ipynb)
+
+
 ---
 ### Data
 ---
+Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
 
 ### Data sources
 
@@ -98,7 +104,18 @@ Used greykite to ... Search trends for the most and least restricted states are 
 |travel_restrictions|Variable|All datasets in data folder.| Binary variable with a value of 1 if state restricted all inter-state travel in effect in the week leading up to the date in the week of interest and a value of 0 if no such restriction was in place.
 |week|Variable|All datasets in data folder.| 7 day period ending in the date specified.
 
+---
+### EDA
 
+* Grouped states into groups: 'most restricted' and 'least restricted' after examining search terms per state and realising there was too much information to make meaningful predictions. 
+* Compared searches of different mental health search for the two groups of states and found, although similar, there was a noticable difference between the two groups during the COVID-19 pandemic, in the middle of 2020, particularly for the search term 'mental health'.
+* Checked that data was stationary for both groups using the augmented Dickey-Fuller Test.
+* Checked seasonality of search datas and found:
+    * 'Depression' searches trend down. 
+    * 'Mental health' and 'anxiety' rising sharply. 
+    * 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
+    * 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
+    * 'Counselling' and 'addiction' both had a dip around the end of 2020.
 ---
 ### Model Evaluation
 
@@ -111,6 +128,7 @@ I. Forecast Models Before Pandemic
 
 II. Forecast Models During Pandemic
 * Both SARIMA and Recursive multi-step models for the Most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
+* The recursive multistep forecasting models for the least restricted states were improved for 'depression', 'anxiety' and particularly 'mental health' searches by including exogenous features whereas the SARIMA with exogenous features only performed better for this group of states in predicting 'addiction' searches.
 
 III. Forecast Models After Pandemic
 
