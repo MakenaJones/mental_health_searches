@@ -9,10 +9,22 @@ Can we use time series data with covid restrictions as exogenous features to pre
 ### Table of Contents
 
 1. [Data Preparation](../code/01_Data_preparation.ipynb)
+Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
 
 2. [EDA](../code/02_EDA.ipynb)
+* Grouped states into groups: 'most restricted' and 'least restricted' after examining search terms per state and realising there was too much information to make meaningful predictions. 
+* Compared searches of different mental health search for the two groups of states and found, although similar, there was a noticable difference between the two groups during the COVID-19 pandemic, in the middle of 2020, particularly for the search term 'mental health'.
+* Checked that data was stationary for both groups using the augmented Dickey-Fuller Test.
+* Checked seasonality of search datas and found:
+    * 'Depression' searches trend down. 
+    * 'Mental health' and 'anxiety' rising sharply. 
+    * 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
+    * 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
+    * 'Counselling' and 'addiction' both had a dip around the end of 2020. 
+
 
 3. [Autocorrelation Trend Detection]
+Used greykite to ... Search trends for the most and least restricted states are similar. Trend changepoints do not appear to be tied to restriction timeframe in a meaningful way.
 
 4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb)
 
@@ -29,10 +41,9 @@ Can we use time series data with covid restrictions as exogenous features to pre
 10. [Greykite](../code/10_Greykite.ipynb)
 ---
 ### Data
+---
 
 ### Data sources
-
-Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
 
 * Google trends:
     * [Alaska](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-AK&q=depression,anxiety,addiction,counseling,mental%20health)
@@ -53,9 +64,10 @@ Using google trends , we gathered google search data related to 5 mental health 
 |Dataset|Description|
 |---|---|
 |[alaska.csv]('../data/alaska.csv')| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
-|[all_states.csv]('../data/alaska.csv')| Concatenated all 10 state datasets.
+|[all_states.csv]('../data/all_states.csv')| Concatenated all 10 state datasets. Added categorical column for whether state belonged to 'least restricted' or 'most restricted' group of states.
 |[arizona.csv]('../data/arizona.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
 |[california.csv]('../data/california.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[combined_states.csv]('../data/all_states.csv')| Combined data of all the states with values of each column referring to the mean of values for that variable across all states for that week.
 |[florida.csv]('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
 |[hawaii.csv]('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
 |[least_restricted.csv]('../data/least_restricted.csv')| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
@@ -72,7 +84,7 @@ Using google trends , we gathered google search data related to 5 mental health 
 |addiction|Variable|All datasets in data folder.| Numbers represent search interest in the term 'addiction' relative to the highest point on the chart for the given region and time (in our case, for the given state and week) on Google Trends. A value of 100 would be peak popularity.
 |anxiety|Variable|All datasets in data folder.| Numbers represent search interest in the term 'anxiety' relative to the highest point on the chart for the given region and time (in our case, for the given state and week) on Google Trends. A value of 100 would be peak popularity.
 |business_closures|Variable|All datasets in data folder.| Binary variable with a value of 0 if state did not mandate significant business closures (including restaurants, retail, etc.) in the week leading up to the time period, and a value of 1 if such restrictions were indeed in place.
-|counseling|Variable|All datasets in data folder.| Numbers represent search interest in the term 'counseling' relative to the highest point on the chart for the given region and time (in our case, for the given state and week) on Google Trends. A value of 100 would be peak popularity.
+|counselling|Variable|All datasets in data folder.| Numbers represent search interest in the term 'counseling' relative to the highest point on the chart for the given region and time (in our case, for the given state and week) on Google Trends. A value of 100 would be peak popularity.
 |depression|Variable|All datasets in data folder.| Numbers represent search interest in the term 'depression' relative to the highest point on the chart for the given region and time (in our case, for the given state and week) on Google Trends. A value of 100 would be peak popularity.
 |gatherings_closures|Variable|All datasets in data folder.| Binary variable with a value of 1 if state banned gatherings in response to the Covid-19 pandemic in the week leading up to the time period, and a value of 0 if no ban was in place.
 |mask_mandates|Variable|All datasets in data folder.| Binary variable with a value of 1 if state mandated the wearing of masks in public spaces in response to the pandemic, and a value of 0 if no ban was in place.
@@ -82,11 +94,24 @@ Using google trends , we gathered google search data related to 5 mental health 
 |travel_restrictions|Variable|All datasets in data folder.| Binary variable with a value of 1 if state restricted all inter-state travel in effect in the week leading up to the date in the week of interest and a value of 0 if no such restriction was in place.
 |week|Variable|All datasets in data folder.| 7 day period ending in the date specified.
 
----
-
-
 
 ---
-### Conclusions
+### Model Evaluation
+
+After testing out different time series models, we picked our two best performing models, recursive multi-step forecasting and SARIMAX and explored how they performed for 3 different time periods, with and without exogenous variables.
+
+I. Forecast Models Before Pandemic
+
+* Forecasting 'counselling' searches for the Most Restricted States benefited from including exogenous features (COVID Restrictions) for both SARIMA and Recursive multi-step models. 
+* Forecasting mental health related search terms in Least Restricted states using recursive multi-step forecasting did not benefit from adding exogenous features (COVID Restrictions) and only improved the performance (reduced the MSE) for SARIMAX in forecasting 'depression' searches.
+
+II. Forecast Models During Pandemic
+* Both SARIMA and Recursive multi-step models for the Most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
+
+III. Forecast Models After Pandemic
+
+---
+### Conclusions and Further Study
+
 ---
 ### Software Requirements
