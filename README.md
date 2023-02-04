@@ -1,59 +1,43 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 4: Mental Health Google Searches & State Covid Restrictions
 
 ---
-### Problem Statement
+## Problem Statement
 Our data science group was hired by the [National Institute on Mental Health](https://www.nimh.nih.gov/) to evaluate the effect of the Covid-19 pandemic, particularly with regards to the effect of restrictions put in place in response to the pandemic. With the huge range of restrictions across states, we decided to approach this problem by looking at Google Trends data for different mental health related terms in a variety of states with a variety of restrictions in place before, during and after the pandemic.
 
 Can we use time series data with covid restrictions as exogenous features to predict mental health related google searches?  By modelling on both groups of states with strict restrictions and those with less strict restrictions, will models including the various state restrictions create better forecasts for the various mental health related google search terms than models without?
 
-We will evaluate our models by comparing the Mean Standard Error (MSE) of models 
+We will evaluate our models by comparing the Mean Standard Error (MSE) of models with and without exogenous features, for both groups of states with less restrictions and those with more restrictions enforced during the pandemic.
 
 ---
 
-### Table of Contents
+## Table of Contents
 
-1. [Data Preparation](../code/01_Data_preparation.ipynb)
+1. [Data Preparation](../code/01_Data_preparation.ipynb) : Read and combine data from soures. Group data for EDA and Modeling.
 
+2. [EDA](../code/02_EDA.ipynb) :  Explore data and determine it is both stationary and exhibits seasonality.
 
+3. [Autocorrelation Trend Detection](../code/03_Autocorrelation_Trend_Detection.ipynb) : Quick search of different models of ARIMA for different search terms. Also looked for changepoints using greykite based on various lockdown periods.
 
-2. [EDA](../code/02_EDA.ipynb)
+4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the impact of COVID-19 restrictions on mental health related searches by exploring two different models, Recursive Multistep Forecasting and SARIMAX, with and without COVID-19 Restrictions as Exogenous features, for the time period leading up to and including the beginning of the COVID-19 Pandemic.
 
+5. [Models for the Middle of the Covid-19 Pandemic](../code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the same models as in notebook 4, but this time for the time period during the height of the COVID-19 Pandemic.
 
-3. [Autocorrelation Trend Detection]
+6. [Models for the End of the Covid-19 Pandemic](../code/06_End_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the same models as in notebooks 4 and 5, but this time for the time period nearing the end of the COVID-19 Pandemic.
 
-Quick search of different models of ARIMA for different search terms. Looking for changepoints using greykite based on various lockdown periods. Do not appear to be tied to restriction timeframe in a meaningful way.
+7. [Vector Autoregression](../code/07_Vector_Autoregression.ipynb) : 
+Forecasted on all searches together to find the best models by finding changes in trends after COVID-19 restrictions started, adapted from [machinelearningplus.com](https://www.machinelearningplus.com/time-series/vector-autoregression-examples-python/).
 
-4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb)
+8. [TBATS](../code/08_TBATS.ipynb) : 
+Forecasted with TBATS to find the best models by finding changes in trend after COVID-19 restrictions started, adapted from this [project](https://pypi.org/project/tbats/).
 
+9. [SARIMA](../code/09_SARIMA.ipynb) : Forecasted with SARIMA, tuning and fitting on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions. Adapted from this [kaggle project](https://www.kaggle.com/code/sajikim/time-series-forecasting-methods-example-python/notebook).
 
-
-5. [Models for the Middle of the Covid-19 Pandemic](../code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb)
-
-
-
-6. [Models for the End of the Covid-19 Pandemic](../code/06_End_COVID_ForecasterAutoreg_SARIMAX.ipynb)
-
-
-
-7. [Vector Autoregression](../code/07_Vector_Autoregression.ipynb)
-
-
-
-8. [TBATS](../code/08_TBATS.ipynb)
-
-
-
-9. [SARIMA](../code/09_SARIMA.ipynb)
-
-
-
-10. [Greykite](../code/10_Greykite.ipynb)
-
+10. [Greykite](../code/10_Greykite.ipynb) : Forecasted with Greykite time series model, tuning and fitting on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions, adapted from this [project](https://linkedin.github.io/greykite/docs/0.4.0/html/gallery/tutorials/0300_weekly_data.html).
 
 ---
-### Data
----
-Using google trends , we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
+## Data
+
+Using google trends, we gathered google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) from January 2018 - January 2023 for 10 states (Alaska, Arizona, California, Florida, Hawaii, Massachussetts, New York, South Dakoda, Texas and Washington), and combined it with data on what state-mandated restrictions were in place during the period.
 
 ### Data sources
 
@@ -68,7 +52,8 @@ Using google trends , we gathered google search data related to 5 mental health 
     * [South Dakota](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-SD&q=depression,anxiety,addiction,counseling,mental%20health)
     * [Texas](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-TX&q=depression,anxiety,addiction,counseling,mental%20health)
     * [Washington](https://trends.google.com/trends/explore?date=2018-01-01%202023-01-01&geo=US-WA&q=depression,anxiety,addiction,counseling,mental%20health)
-    
+
+
 * Sources for timelines of different state-mandated Covid-19 restrictions:
     * [Covid State Restrictions](../sources/covid_restrictions.txt)
 
@@ -107,19 +92,22 @@ Using google trends , we gathered google search data related to 5 mental health 
 |week|Variable|All datasets in data folder.| 7 day period ending in the date specified.
 
 ---
-### EDA
+## EDA
 
-* Grouped states into groups: 'most restricted' and 'least restricted' after examining search terms per state and realising there was too much information to make meaningful predictions. 
-* Compared searches of different mental health search for the two groups of states and found, although similar, there was a noticable difference between the two groups during the COVID-19 pandemic, in the middle of 2020, particularly for the search term 'mental health'.
-* Checked that data was stationary for both groups using the augmented Dickey-Fuller Test.
-* Checked seasonality of search datas and found:
-    * 'Depression' searches trend down. 
-    * 'Mental health' and 'anxiety' rising sharply. 
-    * 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
-    * 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
-    * 'Counselling' and 'addiction' both had a dip around the end of 2020.
+   Started by grouping states into 2 groups: 'most restricted' and 'least restricted' after examining search terms per state and realising there was too much information to make meaningful predictions. 
+   Compared searches of different mental health search for the two groups of states and found, although similar, there was a noticable difference between the two groups during the COVID-19 pandemic, in the middle of 2020, particularly for the search term 'mental health'.
+   Checked that data was stationary for both groups using the augmented Dickey-Fuller Test.
+
+   Checked seasonality of search datas and found:
+* 'Depression' searches trend down. 
+* 'Mental health' and 'anxiety' rising sharply. 
+* 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
+* 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
+* 'Counselling' and 'addiction' both had a dip around the end of 2020.
+
 ---
-### Model Evaluation
+
+## Model Evaluation
 
 After testing out different time series models, we picked our two best performing models, recursive multi-step forecasting and SARIMAX and explored how they performed for 3 different time periods, with and without exogenous variables.
 
@@ -133,9 +121,12 @@ II. Forecast Models During Pandemic
 * The recursive multistep forecasting models for the least restricted states were improved for 'depression', 'anxiety' and particularly 'mental health' searches by including exogenous features whereas the SARIMA with exogenous features only performed better for this group of states in predicting 'addiction' searches.
 
 III. Forecast Models After Pandemic
-
+* Most restricted states did not benefit from adding exogenous features for both SARIMAX and recursive multi-step forecasting models in any of the search terms. However, adding restrictions as exogenous features improved the performance of forecasting:
+    * 'depression', 'anxiety' and 'mental health' in recursive multi-step forecasting models
+    * 'mental health' searches using the SARIMAX model  
+* In the least restricted states,forecasting 'depression' and 'counselling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models.
 ---
-### Conclusions and Further Study
+## Conclusions and Further Study
 
 ---
 ### Software Requirements
