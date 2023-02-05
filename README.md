@@ -8,31 +8,33 @@ Can we use time series data with covid restrictions as exogenous features to pre
 
 We will evaluate our models by comparing the Mean Standard Error (MSE) of models with and without exogenous features, for both groups of states with less restrictions and those with more restrictions enforced during the pandemic.
 
+Will the models see the changing search pattern after restrictions were enforced?
+
 ---
 
 ## Table of Contents
 
-1. [Data Preparation](../code/01_Data_preparation.ipynb) : Read and combine data from soures. Group data for EDA and Modeling.
+1. [Data Preparation](https://github.com/MakenaJones/mental_health_searches/blob/main/code/01_Data_preparation.ipynb) : Read and combine data from soures. Group data for EDA and Modeling.
 
-2. [EDA](../code/02_EDA.ipynb) :  Explore data and determine it is both stationary and exhibits seasonality.
+2. [EDA](https://github.com/MakenaJones/mental_health_searches/blob/main/code/02_EDA.ipynb) :  Explore data and determine it is both stationary and exhibits seasonality.
 
-3. [Autocorrelation Trend Detection](../code/03_Autocorrelation_Trend_Detection.ipynb) : Quick search of different models of ARIMA for different search terms. Also looked for changepoints using greykite based on various lockdown periods.
+3. [Autocorrelation Trend Detection](https://github.com/MakenaJones/mental_health_searches/blob/main/code/03_Autocorrelation_Trend_Detection.ipynb) : Quick search of different models of ARIMA for different search terms. Also looked for changepoints using greykite based on various lockdown periods.
 
-4. [Models for the Start of the Covid-19 Pandemic](../code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the impact of COVID-19 restrictions on mental health related searches by exploring two different models, Recursive Multistep Forecasting and SARIMAX, with and without COVID-19 Restrictions as Exogenous features, for the time period leading up to and including the beginning of the COVID-19 Pandemic.
+4. [Models for the Start of the Covid-19 Pandemic](https://github.com/MakenaJones/mental_health_searches/blob/main/code/04_Start_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the impact of COVID-19 restrictions on mental health related searches by exploring two different models, Recursive Multistep Forecasting and SARIMAX, with and without COVID-19 Restrictions as Exogenous features, for the time period leading up to and including the beginning of the COVID-19 Pandemic.
 
-5. [Models for the Middle of the Covid-19 Pandemic](../code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the same models as in notebook 4, but this time for the time period during the height of the COVID-19 Pandemic.
+5. [Models for the Middle of the Covid-19 Pandemic](https://github.com/MakenaJones/mental_health_searches/blob/main/code/05_Middle_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the same models as in notebook 4, but this time for the time period during the height of the COVID-19 Pandemic.
 
-6. [Models for the End of the Covid-19 Pandemic](../code/06_End_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the same models as in notebooks 4 and 5, but this time for the time period nearing the end of the COVID-19 Pandemic.
+6. [Models for the End of the Covid-19 Pandemic](https://github.com/MakenaJones/mental_health_searches/blob/main/code/06_end_COVID_ForecasterAutoreg_SARIMAX.ipynb) : Explore and evaluate the same models as in notebooks 4 and 5, but this time for the time period nearing the end of the COVID-19 Pandemic.
 
-7. [Vector Autoregression](../code/07_Vector_Autoregression.ipynb) : 
-Forecasted on all searches together to find the best models by finding changes in trends after COVID-19 restrictions started, adapted from [machinelearningplus.com](https://www.machinelearningplus.com/time-series/vector-autoregression-examples-python/).
+7. [Vector Autoregression](https://github.com/MakenaJones/mental_health_searches/blob/main/code/07_Vector_Autoregression.ipynb) : Forecasted on all searches together to find the best models by finding changes in trends after COVID-19 restrictions started.
 
-8. [TBATS](../code/08_TBATS.ipynb) : 
-Forecasted with TBATS to find the best models by finding changes in trend after COVID-19 restrictions started, adapted from this [project](https://pypi.org/project/tbats/).
+8. [TBATS](https://github.com/MakenaJones/mental_health_searches/blob/main/code/08_TBATS.ipynb) : Forecasted with TBATS to find the best models by finding changes in trend after COVID-19 restrictions started.
 
-9. [SARIMA](../code/09_SARIMA.ipynb) : Forecasted with SARIMA, tuning and fitting on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions. Adapted from this [kaggle project](https://www.kaggle.com/code/sajikim/time-series-forecasting-methods-example-python/notebook).
+9. [SARIMA](https://github.com/MakenaJones/mental_health_searches/blob/main/code/09_SARIMA.ipynb) : Forecasted with SARIMA, tuning and fitting on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions.
 
-10. [Greykite](../code/10_Greykite.ipynb) : Forecasted with Greykite time series model, tuning and fitting on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions, adapted from this [project](https://linkedin.github.io/greykite/docs/0.4.0/html/gallery/tutorials/0300_weekly_data.html).
+10. [Greykite](https://github.com/MakenaJones/mental_health_searches/blob/main/code/10_Greykite.ipynbb) : Forecasted with Greykite time series model, tuning and fitting on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions.
+
+11. [Prophet](https://github.com/MakenaJones/mental_health_searches/blob/main/code/11_Prophet.ipynb) : Forecasted with Prophet using covid restrictions inputed as one-time holidays.
 
 ---
 ## Data
@@ -55,25 +57,25 @@ Using google trends, we gathered google search data related to 5 mental health t
 
 
 * Sources for timelines of different state-mandated Covid-19 restrictions:
-    * [Covid State Restrictions](../sources/covid_restrictions.txt)
+    * [Covid State Restrictions](https://github.com/MakenaJones/mental_health_searches/blob/main/Sources/covid_restrictions.txt)
 
 ### Datasets
 |Dataset|Description|
 |---|---|
-|[alaska.csv]('../data/alaska.csv')| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
-|[all_states.csv]('../data/all_states.csv')| Concatenated all 10 state datasets. Added categorical column for whether state belonged to 'least restricted' or 'most restricted' group of states.
-|[arizona.csv]('../data/arizona.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
-|[california.csv]('../data/california.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|[combined_states.csv]('../data/all_states.csv')| Combined data of all the states with values of each column referring to the mean of values for that variable across all states for that week.
-|[florida.csv]('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|[hawaii.csv]('../data/florida.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|[least_restricted.csv]('../data/least_restricted.csv')| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
-|[mass.csv]('../data/mass.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Massachusetts from January 2018 - January 2023.
-|[most_restricted.csv]('../data/most_restricted.csv')| Concatenated datasets for the states with the most Covid-19 restrictions in place during the pandemic: Alaska, California, Hawaii, Massachusetts, New York and Washington.
-|[new_york.csv]('../data/new_york.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of New York from January 2018 - January 2023.
-|[south_dakota.csv]('../data/south_dakota.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of South Dakota from January 2018 - January 2023.
-|[texas.csv]('../data/texas.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Texas from January 2018 - January 2023.
-|[washington.csv]('../data/washington.csv')| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Washington state from January 2018 - January 2023.
+|[alaska.csv]| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
+|[all_states.csv]| Concatenated all 10 state datasets. Added categorical column for whether state belonged to 'least restricted' or 'most restricted' group of states.
+|[arizona.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
+|[california.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[combined_states.csv]| Combined data of all the states with values of each column referring to the mean of values for that variable across all states for that week.
+|[florida.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[hawaii.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[least_restricted.csv]| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
+|[mass.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Massachusetts from January 2018 - January 2023.
+|[most_restricted.csv]| Concatenated datasets for the states with the most Covid-19 restrictions in place during the pandemic: Alaska, California, Hawaii, Massachusetts, New York and Washington.
+|[new_york.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of New York from January 2018 - January 2023.
+|[south_dakota.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of South Dakota from January 2018 - January 2023.
+|[texas.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Texas from January 2018 - January 2023.
+|[washington.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Washington state from January 2018 - January 2023.
 
 ### Data Dictionary
 |Feature|Type|Dataset|Description|
@@ -97,13 +99,12 @@ Using google trends, we gathered google search data related to 5 mental health t
    Started by grouping states into 2 groups: 'most restricted' and 'least restricted' after examining search terms per state and realising there was too much information to make meaningful predictions. 
    Compared searches of different mental health search for the two groups of states and found, although similar, there was a noticable difference between the two groups during the COVID-19 pandemic, in the middle of 2020, particularly for the search term 'mental health'.
    Checked that data was stationary for both groups using the augmented Dickey-Fuller Test.
-
-   Checked seasonality of search datas and found:
+   Checked seasonality and trends of search data and found:
 * 'Depression' searches trend down. 
-* 'Mental health' and 'anxiety' rising sharply. 
 * 'Mental health' started to rise in the middle of 2021 after most of the restrictions were lifted. 
-* 'Anxiety' searches had a sharp rise at the beginning of the COVID restrictions and still remains high
+* 'Anxiety' searches had a rise at the beginning of the COVID restrictions and still remain high.
 * 'Counselling' and 'addiction' both had a dip around the end of 2020.
+* 'Depression' and 'mental health' have the strongest seasonality. 
 
 ---
 
@@ -113,20 +114,45 @@ After testing out different time series models, we picked our two best performin
 
 I. Forecast Models Before Pandemic
 
-* Forecasting 'counselling' searches for the Most Restricted States benefited from including exogenous features (COVID Restrictions) for both SARIMA and Recursive multi-step models. 
+* Forecasting 'counseling' searches for the Most Restricted States benefited from including exogenous features (COVID Restrictions) for both SARIMA and Recursive multi-step models. 
+![start_most](https://github.com/MakenaJones/mental_health_searches/blob/main/images/most_mse_diff_2020-05-30.jpeg) 
+
 * Forecasting mental health related search terms in Least Restricted states using recursive multi-step forecasting did not benefit from adding exogenous features (COVID Restrictions) and only improved the performance (reduced the MSE) for SARIMAX in forecasting 'depression' searches.
+![start_least](https://github.com/MakenaJones/mental_health_searches/blob/main/images/least_mse_diff_2020-05-30.jpeg) 
 
 II. Forecast Models During Pandemic
 * Both SARIMA and Recursive multi-step models for the Most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
+![middle_most](https://github.com/MakenaJones/mental_health_searches/blob/main/images/most_mse_diff_2020-09-30.jpeg)
+
 * The recursive multistep forecasting models for the least restricted states were improved for 'depression', 'anxiety' and particularly 'mental health' searches by including exogenous features whereas the SARIMA with exogenous features only performed better for this group of states in predicting 'addiction' searches.
+![middle_least](https://github.com/MakenaJones/mental_health_searches/blob/main/images/least_mse_diff_2020-09-30.jpeg)
 
 III. Forecast Models After Pandemic
 * Most restricted states did not benefit from adding exogenous features for both SARIMAX and recursive multi-step forecasting models in any of the search terms. However, adding restrictions as exogenous features improved the performance of forecasting:
     * 'depression', 'anxiety' and 'mental health' in recursive multi-step forecasting models
     * 'mental health' searches using the SARIMAX model  
-* In the least restricted states,forecasting 'depression' and 'counselling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models.
+![end_most](https://github.com/MakenaJones/mental_health_searches/blob/main/images/most_mse_diff_2021-01-01.jpeg)
+
+* In the least restricted states,forecasting 'depression' and 'counseling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models.
+![end_least](https://github.com/MakenaJones/mental_health_searches/blob/main/images/least_mse_diff_2021-01-01.jpeg)
+
+We fitted SARIMAX and Greykite on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions. SARIMAX and Greykite had slightly different predictions for the beginning of COVID-19, but they both over-predicted counseling searches.
+![SARIMAX](https://github.com/MakenaJones/mental_health_searches/blob/main/images/forecasting_sarima_counselling.jpeg)
+
+Prophet time series modelling, which performed well in predicting some mental health searches, did not perform better by adding COVID-19 restrictions as one-time holidays during the time periods at the beginning, middle and end of the pandemic. 
+
 ---
 ## Conclusions and Further Study
 
+* Mental health had an increase in searches towards the end of the pandemic in all states (regardless of restrictions in place)
+* Forecasting 'counseling' in beginning of pandemic using restrictions as exogenous features improved the performance of both models (multistep/SARIMAX) for most restricted states
+* In the middle of the pandemic, SARIMA and Recursive multi-step models for the most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
+* At the end of the pandemic, forecasting 'depression' and 'counseling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models for least restricted states
+* SARIMAX and Greykite showed the reduction of counseling searches at the beginning of the Covid-19 restrictions compared to normal for this period of time.
+* Further study/limitations - if wanting to isolate the effect of the restrictions themselves, would have to incorporate other factors that were occuring concurrently before, during and after the pandemic into our models.
+* Would be interesting to examine if actual patient numbers/calls to health lines/requests for telehealth services changed for counseling/mental health related services during the periods we examined since we were only looking at Google searches. 
+
 ---
 ### Software Requirements
+
+For this project, we imported pandas, listdir, matplotlib, numpy, seaborn, statsmodels, greykite, datetime, warnings, collections, sklearn, plotly, itertools, tqdm, prophet, math, multiprocessing and skforecast.
