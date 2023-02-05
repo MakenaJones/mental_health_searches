@@ -153,11 +153,11 @@ To answer the second part of our problem statement, regarding whether models see
 * SARIMAX and Greykite showed the reduction of counseling searches at the beginning of the Covid-19 restrictions compared to normal for this period of time.
 
 ---
-### Further Study
+## Further Study
  If wanting to isolate the effect of the restrictions themselves, we would have to incorporate other factors that were occuring concurrently before, during and after the pandemic into our models.
  Would be interesting to examine if actual patient numbers/calls to health lines/requests for telehealth services changed for counseling/mental health related services during the periods we examined since we were only looking at Google searches. 
 
 ---
-### Software Requirements
+## Software Requirements
 
-For this project, we imported pandas, listdir, matplotlib, numpy, seaborn, statsmodels, greykite, datetime, warnings, collections, sklearn, plotly, itertools, tqdm, prophet, math, multiprocessing and skforecast.
+For this project, we imported pandas, listdir, matplotlib, numpy, seaborn, statsmodels, greykite (note: have to create seperate environment - use this [guide](https://linkedin.github.io/greykite/installation)), datetime, warnings, collections, sklearn, plotly, itertools, tqdm, prophet, math, multiprocessing and skforecast.
