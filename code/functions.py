@@ -377,7 +377,7 @@ def plot_MSE_difference(rmf_mse_dict, sarimax_mse_dict, restrictions, period, yl
     ax[0].bar(range(len(rmf_mse_dict)), list(rmf_mse_dict.values()), tick_label=list(rmf_mse_dict.keys()), color = cols)
     ax[0].set_ylim(ylim)
     ax[0].set_ylabel('MSE difference', fontsize=15)
-    ax[0].set_xticklabels(['Depression', 'Anxiety', 'Addiction', 'Counceling', 'Mental Health'] )
+    ax[0].set_xticklabels(['Depression', 'Anxiety', 'Addiction', 'Counseling', 'Mental Health'] )
     ax[0].xaxis.set_tick_params(labelsize=15, rotation = 15)
 
     # Plost SARIMAX
@@ -386,7 +386,7 @@ def plot_MSE_difference(rmf_mse_dict, sarimax_mse_dict, restrictions, period, yl
     ax[1].set_title('SARIMAX', fontsize=16)
     ax[1].set_ylim(ylim)
     ax[1].xaxis.set_tick_params(labelsize=15)
-    ax[1].set_xticklabels(['Depression', 'Anxiety', 'Addiction', 'Counceling', 'Mental Health'] )
+    ax[1].set_xticklabels(['Depression', 'Anxiety', 'Addiction', 'Counseling', 'Mental Health'] )
     ax[1].xaxis.set_tick_params(labelsize=15, rotation = 15)
     
     
