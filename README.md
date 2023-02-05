@@ -62,20 +62,20 @@ Using google trends, we gathered google search data related to 5 mental health t
 ### Datasets
 |Dataset|Description|
 |---|---|
-|[alaska.csv]| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
-|[all_states.csv]| Concatenated all 10 state datasets. Added categorical column for whether state belonged to 'least restricted' or 'most restricted' group of states.
-|[arizona.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
-|[california.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|[combined_states.csv]| Combined data of all the states with values of each column referring to the mean of values for that variable across all states for that week.
-|[florida.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|[hawaii.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
-|[least_restricted.csv]| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
-|[mass.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Massachusetts from January 2018 - January 2023.
-|[most_restricted.csv]| Concatenated datasets for the states with the most Covid-19 restrictions in place during the pandemic: Alaska, California, Hawaii, Massachusetts, New York and Washington.
-|[new_york.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of New York from January 2018 - January 2023.
-|[south_dakota.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of South Dakota from January 2018 - January 2023.
-|[texas.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Texas from January 2018 - January 2023.
-|[washington.csv]| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Washington state from January 2018 - January 2023.
+|[alaska.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/alaska.csv)| Google search data related to 5 mental health terms (anxiety, depression, addiction, counseling and mental health) combined with data on state-mandated Covid-19 restrictions for the state of Alaska from January 2018 - January 2023.
+|[all_states.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/all_states.csv)| Concatenated all 10 state datasets. Added categorical column for whether state belonged to 'least restricted' or 'most restricted' group of states.
+|[arizona.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/arizona.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Arizona from January 2018 - January 2023.
+|[california.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/california.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[combined_states.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/combined_states.csv)| Combined data of all the states with values of each column referring to the mean of values for that variable across all states for that week.
+|[florida.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/florida.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[hawaii.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/hawaii.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of California from January 2018 - January 2023.
+|[least_restricted.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/least_restricted.csv)| Concatenated datasets for the states with the least Covid-19 restrictions in place during the pandemic: Arizona, Florida, South Dakota and Texas.
+|[mass.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/mass.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Massachusetts from January 2018 - January 2023.
+|[most_restricted.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/most_restricted.csv)| Concatenated datasets for the states with the most Covid-19 restrictions in place during the pandemic: Alaska, California, Hawaii, Massachusetts, New York and Washington.
+|[new_york.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/new_york.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of New York from January 2018 - January 2023.
+|[south_dakota.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/south_dakota.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of South Dakota from January 2018 - January 2023.
+|[texas.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/texas.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Texas from January 2018 - January 2023.
+|[washington.csv](https://github.com/MakenaJones/mental_health_searches/blob/main/data/washington.csv)| Google search data combined with data on state-mandated Covid-19 restrictions for the state of Washington state from January 2018 - January 2023.
 
 ### Data Dictionary
 |Feature|Type|Dataset|Description|
@@ -142,15 +142,20 @@ We fitted SARIMAX and Greykite on data before COVID-19 and checked the differenc
 Prophet time series modelling, which performed well in predicting some mental health searches, did not perform better by adding COVID-19 restrictions as one-time holidays during the time periods at the beginning, middle and end of the pandemic. 
 
 ---
-## Conclusions and Further Study
-
+## Conclusions
+Regarding the first part of our problem statement, on whether time series models including the various state restrictions create better forecasts for the various mental health related google search terms than models without, the answer is for certain search terms during certain time periods. More specifically:
 * Mental health had an increase in searches towards the end of the pandemic in all states (regardless of restrictions in place)
-* Forecasting 'counseling' in beginning of pandemic using restrictions as exogenous features improved the performance of both models (multistep/SARIMAX) for most restricted states
+* Forecasting 'counseling' in beginning of pandemic using restrictions as exogenous features improved the performance of both models (multistep/SARIMAX) for most restricted states.
 * In the middle of the pandemic, SARIMA and Recursive multi-step models for the most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
-* At the end of the pandemic, forecasting 'depression' and 'counseling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models for least restricted states
+* At the end of the pandemic, forecasting 'depression' and 'counseling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models for least restricted states.
+
+To answer the second part of our problem statement, regarding whether models see the changing search pattern after restrictions were enforced, the answer is only for 'counseling' searches at the beginning of the Covid-19 pandemic. More specifically:
 * SARIMAX and Greykite showed the reduction of counseling searches at the beginning of the Covid-19 restrictions compared to normal for this period of time.
-* Further study/limitations - if wanting to isolate the effect of the restrictions themselves, would have to incorporate other factors that were occuring concurrently before, during and after the pandemic into our models.
-* Would be interesting to examine if actual patient numbers/calls to health lines/requests for telehealth services changed for counseling/mental health related services during the periods we examined since we were only looking at Google searches. 
+
+---
+### Further Study
+ If wanting to isolate the effect of the restrictions themselves, we would have to incorporate other factors that were occuring concurrently before, during and after the pandemic into our models.
+ Would be interesting to examine if actual patient numbers/calls to health lines/requests for telehealth services changed for counseling/mental health related services during the periods we examined since we were only looking at Google searches. 
 
 ---
 ### Software Requirements
