@@ -136,8 +136,8 @@ III. Forecast Models After Pandemic
 * In the least restricted states,forecasting 'depression' and 'counseling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models.
 ![end_least](https://github.com/MakenaJones/mental_health_searches/blob/main/images/least_mse_diff_2021-01-01.jpeg)
 
-We fitted SARIMAX and Greykite on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions. SARIMAX and Greykite had slightly different predictions for the beginning of COVID-19, but they both over-predicted counseling searches.
-![SARIMAX](https://github.com/MakenaJones/mental_health_searches/blob/main/images/forecasting_sarima_counselling.jpeg)
+We fitted SARIMA and Greykite on data before COVID-19 and checked the difference in the forecast and actual values for the beginning of the COVID-19 restrictions. SARIMA and Greykite had slightly different predictions for the beginning of COVID-19, but they both over-predicted counseling searches.
+![SARIMA](https://github.com/MakenaJones/mental_health_searches/blob/main/images/forecasting_sarima_counselling.jpeg)
 
 Prophet time series modelling, which performed well in predicting some mental health searches, did not perform better by adding COVID-19 restrictions as one-time holidays during the time periods at the beginning, middle and end of the pandemic. 
 
@@ -146,11 +146,11 @@ Prophet time series modelling, which performed well in predicting some mental he
 Regarding the first part of our problem statement, on whether time series models including the various state restrictions create better forecasts for the various mental health related google search terms than models without, the answer is for certain search terms during certain time periods. More specifically:
 * Mental health had an increase in searches towards the end of the pandemic in all states (regardless of restrictions in place)
 * Forecasting 'counseling' in beginning of pandemic using restrictions as exogenous features improved the performance of both models (multistep/SARIMAX) for most restricted states.
-* In the middle of the pandemic, SARIMA and Recursive multi-step models for the most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
+* In the middle of the pandemic, SARIMAX and Recursive multi-step models for the most Restricted States were improved when it came to forecasting 'anxiety', 'mental health' and particularly 'depression', when exogenous features were included in the models.
 * At the end of the pandemic, forecasting 'depression' and 'counseling' searches benefited from adding COVID Restrictions as exogenous features in both SARIMAX and recursive multi-step forecasting models for least restricted states.
 
 To answer the second part of our problem statement, regarding whether models see the changing search pattern after restrictions were enforced, the answer is only for 'counseling' searches at the beginning of the Covid-19 pandemic. More specifically:
-* SARIMAX and Greykite overpredicted counseling searches at the beginning of the Covid-19 restrictions compared to normal for this period of time (as they actually ended up plummeting).
+* SARIMA and Greykite overpredicted counseling searches at the beginning of the Covid-19 restrictions compared to normal for this period of time (as they actually ended up plummeting).
 
 ---
 ## Further Study
